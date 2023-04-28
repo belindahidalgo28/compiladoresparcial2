@@ -1,0 +1,55 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal SaltoLinea, LlaveA, LlaveC, DosP, Negativo, Coma, CorcheteA, CorcheteC, ComillasD, ComillasS, ID, VAL,
+         Espacio, Real, Alfanumerico, ComentarioB, ComentarioN, Numero, Palabra, Error, Espacioo;
+
+non terminal S, L, LP, V, C, F, B, P, K;
+
+start with S;
+
+S ::= LlaveA L LlaveC;
+      
+
+L ::= L Coma LP
+      |Espacio LP
+      |LP;
+
+LP ::= ID DosP V
+     |VAL DosP V
+     |ID DosP CorcheteA
+     |VAL DosP Espacio V C
+     | C;
+     
+
+C ::= Coma
+    |Espacioo VAL DosP Espacio V C
+    |Espacioo VAL DosP Espacio CorcheteA
+    |Espacioo VAL DosP Espacio CorcheteA B 
+    |Espacioo VAL DosP Espacio CorcheteA Espacioo LlaveA F;
+
+F ::= Espacioo VAL DosP Espacio V LP;
+
+B ::= Espacioo V Coma;
+
+P ::= Coma;
+
+
+V ::= VAL
+    |Numero
+    |ID;
+    
