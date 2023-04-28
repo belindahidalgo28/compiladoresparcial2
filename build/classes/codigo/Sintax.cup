@@ -18,7 +18,7 @@ parser code
 terminal SaltoLinea, LlaveA, LlaveC, DosP, Negativo, Coma, CorcheteA, CorcheteC, ComillasD, ComillasS, ID, VAL,
          Espacio, Real, Alfanumerico, ComentarioB, ComentarioN, Numero, Palabra, Error, Espacioo;
 
-non terminal S, L, LP, V, C, F, B, P, K;
+non terminal S, L, LP, V, C, F, B, P, K, N;
 
 start with S;
 
@@ -40,13 +40,20 @@ C ::= Coma
     |Espacioo VAL DosP Espacio V C
     |Espacioo VAL DosP Espacio CorcheteA
     |Espacioo VAL DosP Espacio CorcheteA B 
+    |Espacioo VAL C
+    |N 
+    |Espacioo LlaveC C
+    |Espacioo LlaveA LP
     |Espacioo VAL DosP Espacio CorcheteA Espacioo LlaveA F;
 
 F ::= Espacioo VAL DosP Espacio V LP;
 
-B ::= Espacioo V Coma;
+B ::= Espacioo V LP;
 
 P ::= Coma;
+
+N ::= Espacioo CorcheteC C;
+    
 
 
 V ::= VAL
